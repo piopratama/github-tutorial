@@ -19,13 +19,18 @@ note:
 * remember when you use git remote it doesn't affect other project as git remote add is independent
 (test it if you like to by executing: "git remote" on two different project)
 * remember some setting is global and some is local (project independen). something like user.name and user.email could be global could be local, local config will override global config. keep this in mind.
-test this command to see your global config "git config --global --list", 
-it will show global setting of git user.name, user.email, and credential.helper
-default value of credential.helper is store which will store your credential in plain text after first time used.
-if you want to set it you can use
+test this command to see your global config 
+```
+git config --global --list
+```
+
+it will show global setting of git such as : user.name, user.email, and credential.helper.
+If you want to set it you can use
+```
 git config --global user.name "Your Name"
 git config --global user.email "your.email@example.com"
 git config --global credential.helper manager
+```
 
 credential manager will prompt you and secure your credential, let's say you have proejct A and push to github it will asked for authentication, but if you have another project B to push it will not asking you anymore.
 
@@ -34,19 +39,24 @@ remove --global option if you want to check your local configuration for every d
 you will also need to check your remote repository in github, are you using https or ssh.
 check it by execute "git remote -v".
 if you see:
+```
 origin  https://github.com/piopratama/github-tutorial.git (fetch)
 origin  https://github.com/piopratama/github-tutorial.git (push)
-
+```
 then it must be https, otherwise could be ssh like this:
+```
 origin  git@github.com:piopratama/github-tutorial.git (fetch)
 origin  git@github.com:piopratama/github-tutorial.git (push)
+```
 
 if you are using https then make sure your credential user.name is right and when you push you will be asked password for the first time.
 
 3. let's try to push our project by first add all file in the project using:
-* git add .
-* git commit -m "your message is here"
-* git branch -M main
-* git push --set-upstream origin main
+```
+git add .
+git commit -m "your message is here"
+git branch -M main
+git push --set-upstream origin main
+```
 
 you need to specify --set-upstream origin main whenever you add branch on the first time, later on you can just use git push
