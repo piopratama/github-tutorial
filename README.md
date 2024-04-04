@@ -16,9 +16,10 @@ connecting git in our machine to github repository we have just created.
 git remote add origin https://github.com/piopratama/github-tutorial.git -> you will get this link in your repository github
 
 note: 
-* remember when you use git remote it doesn't affect other project as git remote add is independent
+* remember when you use "git remote" it doesn't affect "other project" as "git remote add" is independent
 (test it if you like to by executing: "git remote" on two different project)
-* remember some setting is global and some is local (project independen). something like user.name and user.email could be global could be local, local config will override global config. keep this in mind.
+* remember some settings are global and some are local (project independen). 
+eg. user.name and user.email. Local config will override global config. keep this in mind.
 test this command to see your global config 
 ```
 git config --global --list
