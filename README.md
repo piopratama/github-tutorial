@@ -1,6 +1,6 @@
 To play with git we need to install git in our local machine
 1. git can be downloaded from here : https://git-scm.com/
-2. isntall it as usual and test it on your cmd, see if you can try "git version" command
+2. install it as usual and test it on your cmd, see if you can try "git version" command
 
 a lot of things we can do with git but let's focus on init a project with git and push it to github
 1. create a directory and point our terminal/cmd to the directory let's say we have directory called
