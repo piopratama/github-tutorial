@@ -48,3 +48,5 @@ if you are using https then make sure your credential user.name is right and whe
 * git commit -m "your message is here"
 * git branch -M main
 * git push --set-upstream origin main
+
+you need to specify --set-upstream origin main whenever you add branch on the first time, later on you can just use git push
