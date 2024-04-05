@@ -1,78 +1,69 @@
-if you have successfully to connect using https you can try to change it to be more secure using ssh.
-ssh is a method to use crypthography method securing your transaction.
-1. first you need to create pair of key in you machine, private and public key.
-you need to secure your private key and share this public key to github repository to identify it is you.
-2. to create the key.
-```
-ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
-```
 
-change the email with your email associated with github (the email that you use in sign up or login to github web)
-3. then you can put the file generated as your desired but common practice in windows is to put it under C:/user/your_username/.ssh
-if you have already had the key maybe you need to save it as different file name or remove existing file.
+# Switching from HTTPS to SSH for GitHub
 
-4. then open file generated (file with .pub extension is your public key), copy the content and put it under setting->SSH and GPG Keys of your github account.
+SSH offers a more secure method of connecting to GitHub by using cryptographic keys. Here's how you can set up SSH for your GitHub repository:
 
-5. then if you create a new project use :
-```
-git init
-git remote add origin <use ssh repository link>
-```
+## Generating SSH Keys
+1. **Generate SSH Keys**: Open your command line interface (CLI) and generate a new SSH key pair (private and public keys) with the command:
+   ```
+   ssh-keygen -t rsa -b 4096 -C "your_email@example.com"
+   ```
+   Replace `"your_email@example.com"` with the email address associated with your GitHub account.
 
-then add file, commit, and create main branch as we did in README-Basic.md
+2. **Specify Key Storage Path**: Common practice on Windows is to store keys under `C:/Users/your_username/.ssh`. If you already have existing keys, save the new key pair with a different file name or remove the old files.
 
-then to push it we need to provide private key we have. eg.
-```
-GIT_SSH_COMMAND="ssh -i /path/to/keys/<private key file>" git push origin <branch-name>
-```
+3. **Copy Public Key to GitHub**: Navigate to your `.ssh` directory, open the file with a `.pub` extension (this is your public key), copy its contents, and add it to your GitHub account under Settings -> SSH and GPG Keys.
 
-note:
-we will use this private and public key for all repository we are working at, unless we have a reason to have two different ssh key. for example you have two github account.
+## Using SSH with Git
+1. **Initialize New Project with SSH**: For new projects, use the following commands:
+   ```
+   git init
+   git remote add origin git@github.com:username/repository.git
+   ```
+   Replace `git@github.com:username/repository.git` with your repository's SSH link.
 
-6. but sometimes annoying to always pass our private key, so we can utilize agent.
-```
-ssh-add ~/<private key file>
-```
+2. **Authenticate Using the Private Key**: To push changes, authenticate with your private key using:
+   ```
+   GIT_SSH_COMMAND="ssh -i /path/to/keys/private_key" git push origin branch-name
+   ```
 
-next try if it can access github,
-```
-ssh -T git@github.com
-```
+## Managing SSH Keys
+1. **Using SSH Agent**: To avoid entering your private key every time, add it to the SSH agent:
+   ```
+   ssh-add ~/path/to/private_key
+   ```
+2. **Test Connection to GitHub**: Verify your SSH setup by connecting to GitHub:
+   ```
+   ssh -T git@github.com
+   ```
+3. **Persistent SSH Authentication**: To make the SSH agent remember your private key across restarts, create a `config` file in your `.ssh` directory with:
+   ```
+   # GitHub.com server
+   Host github.com
+   IdentityFile /path/to/private_key
+   ```
+   Replace `/path/to/private_key` with the actual path to your private key file.
 
-7. the problem ssh agent will only remember your private key temporary, when you restart your pc it will forget it.
-so how to resolve it ?
-we can create "config" file in .ssh directory (C:/user/your_username/.ssh), inside "config" we put:
-```
-# Github.com server
-Host github.com
-IdentityFile <private key file>
-```
+## Handling Multiple GitHub Accounts
+1. **Generate Separate SSH Keys**: If you have multiple GitHub accounts, generate a separate pair of SSH keys for each.
+2. **Configure SSH for Multiple Accounts**: Modify your `.ssh/config` file to include both accounts:
+   ```
+   # GitHub account A
+   Host github.com-A
+       Hostname github.com
+       User username-A
+       IdentityFile /path/to/first_private_key
 
-try restart your pc and run 
-```
-ssh -T git@github.com
-```
+   # GitHub account B
+   Host github.com-B
+       Hostname github.com
+       User username-B
+       IdentityFile /path/to/second_private_key
+   ```
+3. **Test SSH Connection**: Test the connection for each account with:
+   ```
+   ssh -T git@github.com-A
+   ssh -T git@github.com-B
+   ```
 
-see if it is success.
-
-8. what about if we have two github account, so you might need to create two pair of key.
-one private and public key for your first github account
-another is for your second github account, then modify "config" inside .ssh directory to this
-```
-# GitHub account A
-Host github.com-A
-    Hostname github.com
-    User <username>
-    IdentityFile <first private key>
-
-# GitHub account B
-Host github.com-B
-    Hostname github.com
-    User <username>
-    IdentityFile <second private key>
-```
-
-remember to reside your each public key content to github account associated.
-test it using
-* ssh -T git@github.com-A
-* ssh -T git@github.com-B
+This guide outlines how to switch from HTTPS to SSH for a more secure connection to GitHub, manage SSH keys, and handle multiple GitHub accounts using SSH.

@@ -1,63 +1,70 @@
-To play with git we need to install git in our local machine
-1. git can be downloaded from here : https://git-scm.com/
-2. install it as usual and test it on your cmd, see if you can try "git version" command
 
-a lot of things we can do with git but let's focus on init a project with git and push it to github
-1. create a directory and point our terminal/cmd to the directory let's say we have directory called
-"GIT" and inside this directory I create file called README.md. Inside this file we can type anything that we want.
-2. then execute "git init" inside project directory
-3. go to github and login if you have already had the account, or you can try sign up then follow the process and then login
-4. in github (don't get confused git is on your local machine, github is repository online, imagine it like a google drive or onedrive). in github website create repository.
-in my case i create repository called github-tutorial
+# Getting Started with Git and GitHub
 
-connecting git in our machine to github repository we have just created.
-1. go back to our project "GIT" directory with "README.me" file.
-2. we need to tell git where to push, utilize this command:
-git remote add origin https://github.com/piopratama/github-tutorial.git -> you will get this link in your repository github
+## Installing Git
+1. **Download Git**: Go to [https://git-scm.com/](https://git-scm.com/) and download Git for your operating system.
+2. **Install Git**: Run the downloaded file and follow the installation instructions.
+3. **Verify Installation**: Open your command line interface (CLI) and type:
+   ```
+   git version
+   ```
+   This checks that Git is installed correctly.
 
-note: 
-* remember when you use "git remote" it doesn't affect "other project" as "git remote add" is independent
-(test it if you like to by executing: "git remote" on two different project)
-* remember some settings are global and some are local (project independen). 
-eg. user.name and user.email. Local config will override global config. keep this in mind.
-test this command to see your global config 
-```
-git config --global --list
-```
+## Initializing a Project with Git
+1. **Create a Project Directory**: Make a new folder for your project, named `GIT`.
+2. **Create a README File**: Inside the `GIT` folder, create a file named `README.md` and add some initial content.
+3. **Initialize Git**: In your CLI, navigate to your project directory (`GIT`) and run:
+   ```
+   git init
+   ```
+   This starts a new Git repository in your project folder.
 
-it will show global setting of git such as : user.name, user.email, and credential.helper.
-If you want to set it you can use
-```
-git config --global user.name "Your Name"
-git config --global user.email "your.email@example.com"
-git config --global credential.helper manager
-```
+## Setting Up GitHub
+1. **Create a GitHub Account**: Visit [GitHub](https://github.com/) and sign up or log in.
+2. **Create a New Repository**: On GitHub, create a new repository named `github-tutorial`.
 
-credential manager will prompt you and secure your credential, let's say you have proejct A and push to github it will asked for authentication, but if you have another project B to push it will not asking you anymore.
+## Connecting Local Git to GitHub
+1. **Link Your Project to GitHub**: In your project's CLI, run:
+   ```
+   git remote add origin https://github.com/piopratama/github-tutorial.git
+   ```
+   Replace the URL with the one for your GitHub repository.
 
-remove --global option if you want to check your local configuration for every different project.
+## Git Configuration
+- **Global Configuration**: To view your global Git settings, execute:
+  ```
+  git config --global --list
+  ```
+  To set global configurations like your username and email, use:
+  ```
+  git config --global user.name "Your Name"
+  git config --global user.email "your.email@example.com"
+  git config --global credential.helper manager
+  ```
+- **Local Configuration**: For project-specific settings, omit `--global`. Local config overrides global settings.
 
-you will also need to check your remote repository in github, are you using https or ssh.
-check it by execute "git remote -v".
-if you see:
-```
-origin  https://github.com/piopratama/github-tutorial.git (fetch)
-origin  https://github.com/piopratama/github-tutorial.git (push)
-```
-then it must be https, otherwise could be ssh like this:
-```
-origin  git@github.com:piopratama/github-tutorial.git (fetch)
-origin  git@github.com:piopratama/github-tutorial.git (push)
-```
+## Checking Remote URLs
+- To check your repository's URL, use:
+  ```
+  git remote -v
+  ```
+  This will show if you're using HTTPS or SSH.
 
-if you are using https then make sure your credential user.name is right and when you push you will be asked password for the first time.
-
-3. let's try to push our project by first add all file in the project using:
-```
-git add .
-git commit -m "your message is here"
-git branch -M main
-git push --set-upstream origin main
-```
-
-you need to specify --set-upstream origin main whenever you add branch on the first time, later on you can just use git push
+## Pushing to GitHub
+1. **Add Your Files**: Add all files in the project directory to Git:
+   ```
+   git add .
+   ```
+2. **Commit Your Changes**: Commit your changes with a message:
+   ```
+   git commit -m "Initial commit"
+   ```
+3. **Set Main Branch**: Rename the current branch to `main`:
+   ```
+   git branch -M main
+   ```
+4. **Push to GitHub**: Push your code to GitHub:
+   ```
+   git push --set-upstream origin main
+   ```
+   Use `--set-upstream origin main` the first time you push a new branch. Afterwards, you can simply use `git push`.
